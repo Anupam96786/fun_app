@@ -48,6 +48,10 @@
             <li><a href="#">Blog</a></li>
             <li><a href="#">Contacts</a></li>
         </ul>
+        {% if user.is_authenticated %}
+        {{ request.user.username }}
+        <button><a href="logout/">logout</a></button>
+        {% endif %}
     </div>
     {% block body %}
     {% endblock body %}

@@ -1,30 +1,30 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
     return render(request, 'home.html')
 
 
-def signup(request):
+def usersignup(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = User(username=username, password=password)
+        username = request.POST.get('susername')
+        password = request.POST.get('spassword')
+        user = User(username=susername, password=spassword)
         user.save()
         del user
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=susername, password=spassword)
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            return redirect('signup')
+            return redirect('home')
     else:
-        return render(request, 'signup.html')
+        return render(request, 'home.html')
 
 
-def login(request):
+def userlogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -33,6 +33,11 @@ def login(request):
             login(request, user)
             return redirect('home')
         else:
-            return redirect('login')
+            return redirect('home')
     else:
-        return render(request, 'login.html')
+        return render(request, 'home.html')
+
+
+def userlogout(request):
+    logout(request)
+    return redirect('home')

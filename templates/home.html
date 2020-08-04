@@ -11,19 +11,19 @@ HOME
 <div id="logindialog" class="dialog" data-role="dialog">
     <div class="dialog-title">Login</div>
     <div class="dialog-content">
-        <form method="POST">
+        <form method="POST" action="login/">
             {%csrf_token%}
-            <input type="text" data-role="materialinput"
-               placeholder="Enter your email"
-               data-icon="<span class='mif-envelop'>"
-               data-label="User email"
-               data-informer="Enter a valid email address"
-               data-cls-line="bg-cyan"
-               data-cls-label="fg-cyan"
-               data-cls-informer="fg-lightCyan"
-               data-cls-icon="fg-darkCyan"
-            >
-            <input type="password" data-role="materialinput"
+            <input type="text" name="username" data-role="materialinput"
+             placeholder="Enter your username"
+             data-icon="<span class='mif-envelop'>"
+             data-label="Username"
+             data-informer="Enter your username"
+             data-cls-line="bg-cyan"
+             data-cls-label="fg-cyan"
+             data-cls-informer="fg-lightCyan"
+             data-cls-icon="fg-darkCyan"
+          >
+            <input type="password" name="password" data-role="materialinput"
                    placeholder="Enter your password"
                    data-icon="<span class='mif-key'>"
                    data-label="User Password"
@@ -40,8 +40,53 @@ HOME
         <button class="button primary js-dialog-close">Cancel</button>
     </div>
 </div>
-<div class="pos-fixed pos-center">
+<div id="signupdialog" class="dialog" data-role="dialog">
+  <div class="dialog-title">Login</div>
+  <div class="dialog-content">
+      <form method="POST" action="login/">
+          {%csrf_token%}
+          <input type="text" name="susername" data-role="materialinput"
+             placeholder="Enter your username"
+             data-icon="<span class='mif-envelop'>"
+             data-label="Username"
+             data-informer="Enter your username"
+             data-cls-line="bg-cyan"
+             data-cls-label="fg-cyan"
+             data-cls-informer="fg-lightCyan"
+             data-cls-icon="fg-darkCyan"
+          >
+          <input type="password" name="spassword" data-role="materialinput"
+                 placeholder="Enter your password"
+                 data-icon="<span class='mif-key'>"
+                 data-label="User Password"
+                 data-informer="Enter your password"
+                 data-cls-line="bg-cyan"
+                 data-cls-label="fg-cyan"
+                 data-cls-informer="fg-lightCyan"
+                 data-cls-icon="fg-darkCyan"
+          >
+          <input type="password" name="spassword2" data-role="materialinput"
+                 placeholder="Confirm your password"
+                 data-icon="<span class='mif-key'>"
+                 data-label="User Password"
+                 data-informer="Confirm your password"
+                 data-cls-line="bg-cyan"
+                 data-cls-label="fg-cyan"
+                 data-cls-informer="fg-lightCyan"
+                 data-cls-icon="fg-darkCyan"
+          >
+  </div>
+  <div class="dialog-actions">
+      <button type="submit" class="button primary js-dialog-close">SIGN UP</button>
+      </form>
+      <button class="button primary js-dialog-close">Cancel</button>
+  </div>
+</div>
+<div>
     <button class="button primary" onclick="Metro.dialog.open('#logindialog')">Log In</button>
+</div>
+<div>
+  <button class="button primary" onclick="Metro.dialog.open('#signupdialog')">SIGN UP</button>
 </div>
 <script>
     window.onload=()=>{
