@@ -10,16 +10,34 @@ HOME
 
 {% if user.is_authenticated %}
 {% else %}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <h4 class="alert-heading">Login Alert!</h4>
-  <p>You are not logged in. Please login to your account or create a new account.</p>
-  <hr>
-  <button type="button" class="btn btn-primary">Login</button>
-  <button type="button" class="btn btn-primary">Signup</button>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div style="display:block;">
+<form method="POST">
+    {%csrf_token%}
+    <input type="text" data-role="materialinput"
+       placeholder="Enter your email"
+       data-icon="<span class='mif-envelop'>"
+       data-label="User email"
+       data-informer="Enter a valid email address"
+       data-cls-line="bg-cyan"
+       data-cls-label="fg-cyan"
+       data-cls-informer="fg-lightCyan"
+       data-cls-icon="fg-darkCyan"
+    >
+    <input type="password" data-role="materialinput"
+           placeholder="Enter your password"
+           data-icon="<span class='mif-key'>"
+           data-label="User Password"
+           data-informer="Enter your password"
+           data-cls-line="bg-cyan"
+           data-cls-label="fg-cyan"
+           data-cls-informer="fg-lightCyan"
+           data-cls-icon="fg-darkCyan"
+    >
+    <button type="submit" class="button primary">LOG IN</button>
+</form>
 </div>
+
+
 {% endif %}
 
 {% endblock body %}
