@@ -21,4 +21,9 @@ def send_msg(request, username):
         else:
             return render(request, 'smsg_ad.html')
     else:
-        return render(request, 'smsg_send.html')
+        try:
+            receiver = User.objects.get(username=username)
+            return render(request, 'smsg_send.html')
+        except:
+            return render(request, 'smsg_err.html')
+
