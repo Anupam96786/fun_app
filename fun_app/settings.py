@@ -29,7 +29,6 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'funapp.pythonanywhere.com',
-    '8f87b08179ac.ngrok.io',
     ]
 
 
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'secret_msg',
 ]
 
 MIDDLEWARE = [
