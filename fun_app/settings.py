@@ -25,7 +25,11 @@ SECRET_KEY = '-7sxkz$lekx6(ol)yr83q3%g2p#6r8i^^03#ho2td=%ue7dp$g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'funapp.pythonanywhere.com',
+    ]
 
 
 # Application definition
@@ -118,3 +122,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/funapp/fun_app/static'
