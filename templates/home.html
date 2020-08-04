@@ -10,32 +10,38 @@ HOME
 
 {% if user.is_authenticated %}
 {% else %}
-<div style="display:block;">
-<form method="POST">
-    {%csrf_token%}
-    <input type="text" data-role="materialinput"
-       placeholder="Enter your email"
-       data-icon="<span class='mif-envelop'>"
-       data-label="User email"
-       data-informer="Enter a valid email address"
-       data-cls-line="bg-cyan"
-       data-cls-label="fg-cyan"
-       data-cls-informer="fg-lightCyan"
-       data-cls-icon="fg-darkCyan"
-    >
-    <input type="password" data-role="materialinput"
-           placeholder="Enter your password"
-           data-icon="<span class='mif-key'>"
-           data-label="User Password"
-           data-informer="Enter your password"
-           data-cls-line="bg-cyan"
-           data-cls-label="fg-cyan"
-           data-cls-informer="fg-lightCyan"
-           data-cls-icon="fg-darkCyan"
-    >
-    <button type="submit" class="button primary">LOG IN</button>
-</form>
+<div id="logindialog" class="dialog" data-role="dialog">
+    <div class="dialog-title">Login</div>
+    <div class="dialog-content">
+        <form method="POST">
+            {%csrf_token%}
+            <input type="text" data-role="materialinput"
+               placeholder="Enter your email"
+               data-icon="<span class='mif-envelop'>"
+               data-label="User email"
+               data-informer="Enter a valid email address"
+               data-cls-line="bg-cyan"
+               data-cls-label="fg-cyan"
+               data-cls-informer="fg-lightCyan"
+               data-cls-icon="fg-darkCyan"
+            >
+            <input type="password" data-role="materialinput"
+                   placeholder="Enter your password"
+                   data-icon="<span class='mif-key'>"
+                   data-label="User Password"
+                   data-informer="Enter your password"
+                   data-cls-line="bg-cyan"
+                   data-cls-label="fg-cyan"
+                   data-cls-informer="fg-lightCyan"
+                   data-cls-icon="fg-darkCyan"
+            >
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button primary js-dialog-close">LOG IN</button>
+        </form>
+    </div>
 </div>
+<button class="button primary" onclick="Metro.dialog.open('#logindialog')">Log In</button>
 
 
 {% endif %}
