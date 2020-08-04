@@ -9,8 +9,13 @@
     {% block title %}
     {% endblock title %}
     </title>
+    <style>
+        body {
+        padding-top: 60px;
+    }
+    </style>
   </head>
-  <body data-role="touch" data-on-swipe-right="mySwipeFunction">
+  <body>
     <aside class="sidebar" id="sb1" data-role="sidebar" data-toggle="#sidebar-toggle-1">
         <div class="sidebar-header bg-blue">
             <a href="/" class="fg-white sub-action" onclick="Metro.sidebar.close('#sb1'); return false;">
@@ -44,7 +49,6 @@
             <li><a href="#">Contacts</a></li>
         </ul>
     </div>
-
     {% block body %}
     {% endblock body %}
     <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
