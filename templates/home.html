@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 
-
 {% block title %}
 HOME
 {% endblock title %}
-
 
 {% block body %}
 
@@ -42,9 +40,14 @@ HOME
         <button class="button primary js-dialog-close">Cancel</button>
     </div>
 </div>
-<button class="button primary" onclick="Metro.dialog.open('#logindialog')">Log In</button>
-
-
+<div class="pos-fixed pos-center">
+    <button class="button primary" onclick="Metro.dialog.open('#logindialog')">Log In</button>
+</div>
+<script>
+    window.onload=()=>{
+        Metro.dialog.open('#logindialog');
+    }
+</script>
 {% endif %}
 
 {% endblock body %}
