@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'funapp.pythonanywhere.com',
+    '8f87b08179ac.ngrok.io',
     ]
 
 

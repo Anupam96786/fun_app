@@ -9,12 +9,12 @@ def home(request):
 
 def usersignup(request):
     if request.method == 'POST':
-        username = request.POST.get('susername')
-        password = request.POST.get('spassword')
-        user = User(username=susername, password=spassword)
+        username = request.POST['susername']
+        password = request.POST['spassword']
+        user = User.objects.create_user(username=username, password=password)
         user.save()
         del user
-        user = authenticate(request, username=susername, password=spassword)
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
