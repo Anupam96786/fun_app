@@ -27,3 +27,10 @@ def send_msg(request, username):
         except:
             return render(request, 'smsg_err.html')
 
+
+def delmsg(request):
+    if request.user.is_authenticated:
+        Message.objects.filter(receiver=request.user.id).delete()
+        return redirect('smsg_index')
+    else:
+        return redirect('home')
