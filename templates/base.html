@@ -36,7 +36,7 @@
     ]
 </script>
     <!--  SIDEBAR  -->
-    <aside class="sidebar" id="sb1" data-role="sidebar" data-toggle="#sidebar-toggle-1">
+    <aside class="sidebar bg-dark fg-light" id="sb1" data-role="sidebar" data-toggle="#sidebar-toggle-1">
         <div class="sidebar-header bg-blue">
             <a href="/" class="fg-white sub-action" onclick="Metro.sidebar.close('#sb1'); return false;">
                 <span class="mif-arrow-left mif-2x"></span>
@@ -47,12 +47,12 @@
             <span class="title">FUNAPP</span>
             <span class="subtitle"> 2020 © ANUPAM AND RGD</span>
         </div>
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu fg-light">
             <li><a href="{%url 'home'%}"><span class="mif-home icon"></span>Home</a></li>
-            <li><a href="{%url 'smsg_index'%}"><span class="mif-chat icon"></span>Secret Message</a></li>
+            <li><a href="{%url 'smsg_index'%}"><span class="mif-chat icon"></span>Secret Messages</a></li>
             <li class="divider"></li>
-            <li><a disabled><span class="mif-envelop icon"></span>SEND SECRET MESSAGE</a></li>
-            <li><input type="text" id="winloc" data-role="input" data-clear-button="false" data-custom-buttons="winlocbtn"></li>
+            <li><a disabled><span class="mif-envelop icon"></span>SEND MESSAGE</a></li>
+            <li><input type="text" id="winloc" data-role="input" data-clear-button="false" placeholder="Enter link here" data-custom-buttons="winlocbtn"></li>
             <li class="divider"></li>
             <div id="installContainer" class="hidden"><li><button id="butInstall" class="sidebar-menu button primary"><span class="mif-download2 icon"></span>INSTALL</button></li></div>
         </ul>
