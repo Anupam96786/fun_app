@@ -24,6 +24,8 @@ urlpatterns = [
     path('signup/', views.usersignup, name='signup'),
     path('login/', views.userlogin, name='login'),
     path('logout/', views.userlogout, name='logout'),
+    path('chngpass/', views.chngpass, name='chngpass'),
+    path('addemail/', views.addemail, name='addemail'),
     path('secret_msg/', include('secret_msg.urls')),
     re_path(r'^serviceworker.js', (TemplateView.as_view(template_name="serviceworker.js", content_type='application/javascript', )), name='serviceworker.js'),
 ]

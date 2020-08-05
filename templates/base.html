@@ -74,6 +74,13 @@
             <ul class="d-menu" data-role="dropdown">
                 <li><a href="{%url 'smsg_index'%}">Secret Messages</a></li>
                 <li class="divider bg-lightGray"></li>
+                {% if user.email == '' %}
+                <li><a href="/addemail/">Add Email</a></li>
+                {% else %}
+                <li><a href="/addemail/">Change Email</a></li>
+                {% endif %}
+                <li><a href="/chngpass/">Change Password</a></li>
+                <li class="divider bg-lightGray"></li>
                 <li><a href="/logout/">Logout</a></li>
             </ul>
         </div>

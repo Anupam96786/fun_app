@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Change Password
+{% endblock title %}
+
+
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="password" name='opass' placeholder="old password">
+    <input type="password" name='npass' placeholder="new password">
+    <input type="password" name='npass2' placeholder="confirm password">
+    <button type="submit">Submit</button>
+</form>
+{{ help }}
+{% endblock body %}
