@@ -5,88 +5,59 @@ HOME
 {% endblock title %}
 
 {% block body %}
-
 {% if user.is_authenticated %}
+<div class="pos-fixed pos-center">
+    <a href="{%url 'smsg_index'%}">
+        <div data-role="tile" data-size="large" data-effect="hover-slide-right">
+            <div class="slide-front">
+                <span class="mif-chat icon">
+            </div>
+            <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
+                <p class="text-center">
+                    Receive secret messages from anyone.
+                </p>
+            </div>
+            <span class="branding-bar fg-dark">Secret Messages</span>
+        </div>
+    </a>
+</div>
 {% else %}
 <div id="logindialog" class="dialog" data-role="dialog">
     <div class="dialog-title">Login</div>
     <div class="dialog-content">
-        <form method="POST" action="login/">
+        <form method="POST" action="login/" autocomplete="off">
             {%csrf_token%}
-            <input type="text" name="username" data-role="materialinput"
-             placeholder="Enter your username"
-             data-icon="<span class='mif-envelop'>"
-             data-label="Username"
-             data-informer="Enter your username"
-             data-cls-line="bg-cyan"
-             data-cls-label="fg-cyan"
-             data-cls-informer="fg-lightCyan"
-             data-cls-icon="fg-darkCyan"
-          >
-            <input type="password" name="password" data-role="materialinput"
-                   placeholder="Enter your password"
-                   data-icon="<span class='mif-key'>"
-                   data-label="User Password"
-                   data-informer="Enter your password"
-                   data-cls-line="bg-cyan"
-                   data-cls-label="fg-cyan"
-                   data-cls-informer="fg-lightCyan"
-                   data-cls-icon="fg-darkCyan"
-            >
+            <input type="text" name="username" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Enter your username" autocomplete="off">
+            <input type="password" name="password" data-role="input" placeholder="Enter your password">
     </div>
     <div class="dialog-actions">
         <button type="submit" class="button primary js-dialog-close">LOG IN</button>
         </form>
+        <button class="button primary" onclick="Metro.dialog.close('#logindialog');Metro.dialog.open('#signupdialog')">Sign Up</button>
         <button class="button primary js-dialog-close">Cancel</button>
     </div>
 </div>
+
 <div id="signupdialog" class="dialog" data-role="dialog">
-  <div class="dialog-title">Login</div>
+  <div class="dialog-title">Sign Up</div>
   <div class="dialog-content">
       <form method="POST" action="signup/">
           {%csrf_token%}
-          <input type="text" name="susername" data-role="materialinput"
-             placeholder="Enter your username"
-             data-icon="<span class='mif-envelop'>"
-             data-label="Username"
-             data-informer="Enter your username"
-             data-cls-line="bg-cyan"
-             data-cls-label="fg-cyan"
-             data-cls-informer="fg-lightCyan"
-             data-cls-icon="fg-darkCyan"
-          >
-          <input type="password" name="spassword" data-role="materialinput"
-                 placeholder="Enter your password"
-                 data-icon="<span class='mif-key'>"
-                 data-label="User Password"
-                 data-informer="Enter your password"
-                 data-cls-line="bg-cyan"
-                 data-cls-label="fg-cyan"
-                 data-cls-informer="fg-lightCyan"
-                 data-cls-icon="fg-darkCyan"
-          >
-          <input type="password" name="spassword2" data-role="materialinput"
-                 placeholder="Confirm your password"
-                 data-icon="<span class='mif-key'>"
-                 data-label="User Password"
-                 data-informer="Confirm your password"
-                 data-cls-line="bg-cyan"
-                 data-cls-label="fg-cyan"
-                 data-cls-informer="fg-lightCyan"
-                 data-cls-icon="fg-darkCyan"
-          >
+          <input type="text" name="susername" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Enter your username">
+          <input type="password" name="spassword" data-role="input" placeholder="Enter your password">
+          <input type="password" name="spassword2" data-role="input" placeholder="Confirm your password">
   </div>
   <div class="dialog-actions">
-      <button type="submit" class="button primary js-dialog-close">SIGN UP</button>
+      <button type="submit" class="button primary js-dialog-close">Sign Up</button>
       </form>
+      <button class="button primary" onclick="Metro.dialog.close('#signupdialog');Metro.dialog.open('#logindialog')">Login</button>
       <button class="button primary js-dialog-close">Cancel</button>
   </div>
 </div>
-<div>
+
+<div class="pos-fixed pos-center">
     <button class="button primary" onclick="Metro.dialog.open('#logindialog')">Log In</button>
-</div>
-<div>
-  <button class="button primary" onclick="Metro.dialog.open('#signupdialog')">SIGN UP</button>
+  <button class="button primary" onclick="Metro.dialog.open('#signupdialog')">Sign Up</button>
 </div>
 <script>
     window.onload=()=>{
