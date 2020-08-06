@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Reset Password
+{% endblock title %}
+
+
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="password" name="pass" placeholder="new password">
+    <input type="password" name="pass2" placeholder="confirm password">
+    <button type="submit">Submit</button>
+</form>
+{% endblock body %}

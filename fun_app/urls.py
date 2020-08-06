@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.conf.urls import url
 from . import views
 from django.views.generic import TemplateView
 
@@ -26,6 +27,8 @@ urlpatterns = [
     path('logout/', views.userlogout, name='logout'),
     path('chngpass/', views.chngpass, name='chngpass'),
     path('addemail/', views.addemail, name='addemail'),
+    path('frgtpass/', views.frgtpass, name='frgtpass'),
     path('secret_msg/', include('secret_msg.urls')),
+    url(r'^respass/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.respass, name='respass'),
     re_path(r'^serviceworker.js', (TemplateView.as_view(template_name="serviceworker.js", content_type='application/javascript', )), name='serviceworker.js'),
 ]
