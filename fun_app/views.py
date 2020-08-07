@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 # mailing part
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -57,75 +58,93 @@ def userlogout(request):
 
 # change password
 def chngpass(request):
-    if request.method == 'POST':
-        user = authenticate(request, username=request.user.username, password=request.POST.get('opass'))
-        if user is not None:
-            npass1=request.POST['npass']
-            npass2=request.POST['npass2']
-            if npass1==npass2:
-                user.set_password(request.POST.get('npass'))
-                user.save()
-                return redirect('home')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user = authenticate(request, username=request.user.username, password=request.POST.get('opass'))
+            if user is not None:
+                npass1=request.POST['npass']
+                npass2=request.POST['npass2']
+                if npass1==npass2:
+                    user.set_password(request.POST.get('npass'))
+                    user.save()
+                    return redirect('home')
+                else:
+                    return render(request, 'chngpass.html', {'help': 'New passwords do not match'})
             else:
-                return render(request, 'chngpass.html', {'help': 'New passwords do not match'})
+                return render(request, 'chngpass.html', {'help': 'Incorrect Password'})
         else:
-            return render(request, 'chngpass.html', {'help': 'Incorrect Password'})
+            return render(request, 'chngpass.html')
     else:
-        return render(request, 'chngpass.html')
+        return redirect('home')
 
 # change or add email address
 def addemail(request):
-    if request.method == 'POST':
-        user = authenticate(request, username=request.user.username, password=request.POST.get('pass'))
-        if user is not None:
-            user.email = request.POST.get('email')
-            user.save()
-            return redirect('home')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user = authenticate(request, username=request.user.username, password=request.POST.get('pass'))
+            if user is not None:
+                user.email = request.POST.get('email')
+                user.save()
+                return redirect('home')
+            else:
+                return render(request, 'addemail.html', {'help': 'Incorrect Password'})
         else:
-            return render(request, 'addemail.html', {'help': 'Incorrect Password'})
+            return render(request, 'addemail.html')
     else:
-        return render(request, 'addemail.html')
+        return redirect('home')
 
 # forgot password
 # sending mail or showing the forgot password form
 def frgtpass(request):
-    if request.method == 'POST':
-        try:
-            user = User.objects.get(username=request.POST.get('username'), email=request.POST.get('email'))
-        except:
-            user = None
-        if user is not None:
-            # send mail
-            crnt_site = get_current_site(request)
-            mail_sub = 'Reset Password'
-            message = render_to_string('respassmail.html', {
-                'user': user,
-                'domain': crnt_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.id)),
-                'token': account_activation_token.make_token(user),
-            })
-            to_email = request.POST.get('email')
-            email = EmailMessage(mail_sub, message, to=[to_email])
-            email.send()
-            return redirect('home')
-        else:
-            return render(request, 'frgtpass.html', {'help': 'Username and Email did not match.'})
+    if request.user.is_authenticated:
+        return redirect('home')
     else:
-        return render(request, 'frgtpass.html')
+        if request.method == 'POST':
+            try:
+                user = User.objects.get(username=request.POST.get('username'), email=request.POST.get('email'))
+            except:
+                user = None
+            if user is not None:
+                # send mail
+                crnt_site = get_current_site(request)
+                mail_sub = 'Reset Password'
+                message = render_to_string('respassmail.html', {
+                    'user': user,
+                    'domain': crnt_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.id)),
+                    'token': account_activation_token.make_token(user),
+                })
+                to_email = request.POST.get('email')
+                email = EmailMessage(mail_sub, message, to=[to_email])
+                email.send()
+                return redirect('home')
+            else:
+                return render(request, 'frgtpass.html', {'help': 'Username and Email did not match.'})
+        else:
+            return render(request, 'frgtpass.html')
 
 # password resetting form
 def respass(request, uidb64, token):
-    if request.method == 'POST':
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(id=uid)
-        user.set_password(request.POST.get('pass'))
-        user.save()
+    if request.user.is_authenticated:
         return redirect('home')
     else:
-        try:
+        if request.method == 'POST':
             uid = force_text(urlsafe_base64_decode(uidb64))
             user = User.objects.get(id=uid)
-        except:
-            user = None
-        if user is not None and account_activation_token.check_token(user, token):
-            return render(request, 'respass.html')
+            pass1 = request.POST.get('pass')
+            pass2 = request.POST.get('pass2')
+            if pass1 == pass2:
+                user.set_password(pass1)
+                user.save()
+                return redirect('home')
+            else:
+                messages.error(request, message='Passwords did not match.')
+                return redirect(request.path)
+        else:
+            try:
+                uid = force_text(urlsafe_base64_decode(uidb64))
+                user = User.objects.get(id=uid)
+            except:
+                user = None
+            if user is not None and account_activation_token.check_token(user, token):
+                return render(request, 'respass.html')
