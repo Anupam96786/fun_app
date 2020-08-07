@@ -97,7 +97,7 @@ HOME
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <h3 class="fg-light">Login</h3>
-                    <form  method="POST" action="{{domain}}/login/" autocomplete="off" class="form-group">
+                    <form  method="POST" action="/login/" autocomplete="off" class="form-group">
                         {% csrf_token %}
                         <div class="form-group">
                             <input required type="text" name="username" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Username" autocomplete="off" value="" />
@@ -119,7 +119,7 @@ HOME
                 </div>
                 <div class="col-md-6 login-form-2">
                     <h3>Sign Up</h3>
-                    <form method="POST" action="{{domain}}/signup/" class="form-group" autocomplete="off">
+                    <form method="POST" action="/signup/" class="form-group" autocomplete="off">
                         {%csrf_token%}
                         <div class="form-group">
                             <input required type="text" name="susername" autocomplete="off" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Username" />
