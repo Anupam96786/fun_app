@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block title %}
+HOME
+{% endblock title %}
+
+{% block body %}
+<script>
+    var winlocbtnhome = [
+        {
+            html: "<span class='mif-compass'></span>",
+            cls: "search",
+            onclick: "window.location.replace(document.getElementById('winlochome').value)"
+        }
+    ]
+</script>
+<div style="padding:10px 10vw 0 10vw;">
+<input type="text" class="bg-blue fg-light" id="winlochome" data-role="input" data-clear-button="false" placeholder="Enter link here" data-custom-buttons="winlocbtnhome">
+</div>
+{% if user.is_authenticated %}
+<div class="pos-fixed pos-center">
+    <a href="{%url 'smsg_index'%}">
+        <div data-role="tile" data-size="large" data-effect="hover-slide-right">
+            <div class="slide-front">
+                <span class="mif-chat icon">
+            </div>
+            <div class="slide-back d-flex flex-justify-center flex-align-center p-4 op-mauve">
+                <p class="text-center">
+                    Receive secret messages from anyone.
+                </p>
+            </div>
+            <span class="branding-bar fg-dark">Secret Messages</span>
+        </div>
+    </a>
+</div>
+{% else %}
+
+<style>
+        .login-container{
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+        .login-form-1{
+            padding: 5%;
+            box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+        }
+        .login-form-1 h3{
+            text-align: center;
+            color: #333;
+        }
+        .login-form-2{
+            padding: 5%;
+            background: #0062cc;
+            box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+        }
+        .login-form-2 h3{
+            text-align: center;
+            color: #fff;
+        }
+        .login-container form{
+            padding: 10%;
+        }
+        .btnSubmit
+        {
+            width: 50%;
+            border-radius: 1rem;
+            padding: 1.5%;
+            border: none;
+            cursor: pointer;
+        }
+        .login-form-1 .btnSubmit{
+            font-weight: 600;
+            color: #fff;
+            background-color: #0062cc;
+        }
+        .login-form-2 .btnSubmit{
+            font-weight: 600;
+            color: #0252a8;
+            background-color: #fff;
+        }
+        .login-form-2 .ForgetPwd{
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .login-form-1 .ForgetPwd{
+            color: #0062cc;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        body{
+            overflow-y:scroll;
+        }
+</style>
+
+<div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <h3 class="fg-light">Login</h3>
+                    <form  method="POST" action="{{domain}}/login/" autocomplete="off" class="form-group">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input required type="text" name="username" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Username" autocomplete="off" value="" />
+                            <span>{{error}}</span>
+                        </div>
+                        <div class="form-group">
+                            <input required type="password" name="password" data-role="input" placeholder="Password" class="" placeholder="Password" value="" />
+                        </div>
+                        <div class="form-group">
+                            <h6 class="fg-red">{{lerror}}</p>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+                        <div class="form-group">
+                            <a href='/frgtpass/' class="ForgetPwd">Forgot Password</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 login-form-2">
+                    <h3>Sign Up</h3>
+                    <form method="POST" action="{{domain}}/signup/" class="form-group" autocomplete="off">
+                        {%csrf_token%}
+                        <div class="form-group">
+                            <input required type="text" name="susername" autocomplete="off" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Username" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" data-role="input" name="email" value="" placeholder="Email" />
+                        </div>
+                        <div class="form-group">
+                            <input required id='pw1' type="password" name="spassword" data-role="input" placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                            <input required id='pw2' type="password" name="spassword2" data-role="input" placeholder="Enter Password Again"/>
+                        </div>
+                        <div class="form-group">
+                            <h6 class="fg-red">{{help}}</p>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Register" /><br/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+{% endif %}
+
+{% endblock body %}

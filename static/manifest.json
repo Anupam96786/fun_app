@@ -1,0 +1,42 @@
+{
+	"dir" : "ltr",
+	"lang" : "English",
+	"name" : "Secret Messages",
+	"scope" : "/",
+	"display" : "standalone",
+	"start_url" : "https://funapp.pythonanywhere.com/",
+	"short_name" : "Funapp",
+	"theme_color" : "#349eeb",
+	"description" : "",
+	"orientation" : "portrait",
+	"background_color" : "#4287f5",
+	"icons" : [
+		{
+			"src": "icon48.png",
+			"sizes": "48x48"
+		},
+		{
+			"src": "icon32.png",
+			"sizes": "32x32"
+		},
+		{
+			"src": "icon180.png",
+			"sizes": "180x180"
+		},
+		{
+		    "src": "icon192.png",
+		    "sizes": "192x192"
+		},
+		{
+			"src": "icon512.png",
+			"sizes": "512x512"
+		}],
+	"apple-touch-icon": [
+	    {
+	        "src": "icon192.png",
+			"sizes": "192x192"
+	    }],
+	"url" : "https://funapp.pythonanywhere.com",
+	"screenshots" : [],
+	"generated" : "true"
+}

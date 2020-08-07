@@ -1,0 +1,129 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+        <!-- Required meta tags -->
+    <link rel='manifest' href="{%static 'manifest.json'%}">
+    <link rel="apple-touch-icon" href="{%static 'icon48.png'%}">
+    <link rel="icon" href="{%static 'icon180.png'%}">
+    <meta name="apple-mobile-web-app-status-bar" content="#349eeb">
+    <meta name="theme-color" content="#349eeb">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">
+    <title>
+    {% block title %}
+    {% endblock title %}
+    </title>
+    <style>
+        body {
+        padding-top: 50px;
+        background-color: #161719;
+    }
+    .hidden {
+        display: none !important;
+    }
+    </style>
+  </head>
+  <body class="fg-light">
+      <script>
+    var winlocbtnsb = [
+        {
+            html: "<span class='mif-compass'></span>",
+            cls: "search",
+            onclick: "window.location.replace(document.getElementById('winlocsb').value)"
+        }
+    ]
+</script>
+    <!--  SIDEBAR  -->
+    <aside class="sidebar bg-dark fg-light" id="sb1" data-role="sidebar" data-toggle="#sidebar-toggle-1">
+        <div class="sidebar-header bg-blue">
+            <a href="/" class="fg-white sub-action" onclick="Metro.sidebar.close('#sb1'); return false;">
+                <span class="mif-arrow-left mif-2x"></span>
+            </a>
+            <div class="avatar">
+                <img data-role="gravatar" data-default="wavatar" data-email="a@b.cplklkol">
+            </div>
+            <span class="title">FUNAPP</span>
+            <span class="subtitle"> 2020 © ANUPAM AND RGD</span>
+        </div>
+        <ul class="sidebar-menu fg-light">
+            <li><a href="{%url 'home'%}"><span class="mif-home icon"></span>Home</a></li>
+            <li><a href="{%url 'smsg_index'%}"><span class="mif-chat icon"></span>Secret Messages</a></li>
+            <li class="divider"></li>
+            <li><a disabled><span class="mif-envelop icon"></span>SEND MESSAGE</a></li>
+            <li><input type="text" id="winlocsb" data-role="input" class="bg-blue fg-light" data-clear-button="false" placeholder="Enter link here" data-custom-buttons="winlocbtnsb"></li>
+            <li class="divider"></li>
+            <div id="installContainer" class="hidden"><li><button id="butInstall" class="sidebar-menu button primary"><span class="mif-download2 icon"></span>INSTALL</button></li></div>
+        </ul>
+    </aside>
+
+    <!-- NAV BAR -->
+    <div data-role="appbar" data-expand-point="md" class="bg-blue">
+        <a id="sidebar-toggle-1" class="brand no-hover" style="background-color: #0073ed!important;">
+                <span class="mif-arrow-right icon">
+        </a>
+        <a href="{%url 'home'%}" class="brand no-hover" style="background-color: #0073ed!important;">
+            <span style="width: 55px;" class="p-2 bd-dark border-radius">
+                FUN<sup>APP</sup>
+            </span>
+        </a>
+        {% if user.is_authenticated %}
+        <div class="app-bar-container">
+            <a href="#" class="app-bar-item dropdown-toggle">{{ request.user.username }}</a>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="{%url 'smsg_index'%}">Secret Messages</a></li>
+                <li class="divider bg-lightGray"></li>
+                {% if user.email == '' %}
+                <li><a href="/addemail/">Add Email</a></li>
+                {% else %}
+                <li><a href="/addemail/">Change Email</a></li>
+                {% endif %}
+                <li><a href="/chngpass/">Change Password</a></li>
+                <li class="divider bg-lightGray"></li>
+                <li><a href="/logout/">Logout</a></li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {% block body %}
+    {% endblock body %}
+    <script>
+        const divInstall = document.getElementById('installContainer');
+        const butInstall = document.getElementById('butInstall');
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+          console.log('👍', 'beforeinstallprompt', event);
+          window.deferredPrompt = event;
+          divInstall.classList.toggle('hidden', false);
+          butInstall.click();
+        });
+        butInstall.addEventListener('click', () => {
+          console.log('👍', 'butInstall-clicked');
+          const promptEvent = window.deferredPrompt;
+          if (!promptEvent) {
+            return;
+          }
+          promptEvent.prompt();
+          promptEvent.userChoice.then((result) => {
+            console.log('👍', 'userChoice', result);
+            window.deferredPrompt = null;
+            divInstall.classList.toggle('hidden', true);
+          });
+        });
+        window.addEventListener('appinstalled', (event) => {
+          console.log('👍', 'appinstalled', event);
+        });
+
+
+        if ('serviceWorker' in navigator) {
+            console.log("Registering Service Worker");
+            navigator.serviceWorker.register("{% url 'serviceworker.js' %}")
+              .then(function (reg) { console.log("SW Registration Complete :", reg); })
+              .catch(function (err) { console.log("SW Registration Failed. Error: ", err) });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
+  </body>
+</html>
