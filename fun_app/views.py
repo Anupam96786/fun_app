@@ -19,17 +19,22 @@ def usersignup(request):
         try:
             username = request.POST['susername']
             password = request.POST['spassword']
-            user = User.objects.create_user(username=username, password=password)
-            user.save()
-            if user is not None:
-                login(request, user)
-                return redirect('home')
+            password2 = request.POST['spassword2']
+            email = request.POST['email']
+            if password==password2:
+                user = User.objects.create_user(username=username, password=password, email=email)
+                user.save()
+                if user is not None:
+                    login(request, user)
+                    return render(request, 'home.html')
+                else:
+                    return render(request, 'home.html', {'help':"Username Taken...Try Another"})
             else:
-                return redirect('home')
+                return render(request, 'home.html', {'help':"Passwords don't match"})
         except:
-            return redirect('home')
+            return render(request, 'home.html', {'help':"Username Taken...Try Another"})
     else:
-        return render(request, 'home.html')
+        return redirect('home')
 
 
 def userlogin(request):
@@ -41,9 +46,9 @@ def userlogin(request):
             login(request, user)
             return redirect('home')
         else:
-            return redirect('home')
+            return render(request, 'home.html', {'lerror':"Invalid Username/Password"})
     else:
-        return render(request, 'home.html')
+        return redirect('home')
 
 
 def userlogout(request):
@@ -55,11 +60,16 @@ def chngpass(request):
     if request.method == 'POST':
         user = authenticate(request, username=request.user.username, password=request.POST.get('opass'))
         if user is not None:
-            user.set_password(request.POST.get('npass'))
-            user.save()
-            return redirect('home')
+            npass1=request.POST['npass']
+            npass2=request.POST['npass2']
+            if npass1==npass2:
+                user.set_password(request.POST.get('npass'))
+                user.save()
+                return redirect('home')
+            else:
+                return render(request, 'chngpass.html', {'help': 'New passwords do not match'})
         else:
-            return render(request, 'chngpass.html', {'help': 'old password did not matched'})
+            return render(request, 'chngpass.html', {'help': 'Incorrect Password'})
     else:
         return render(request, 'chngpass.html')
 
@@ -72,7 +82,7 @@ def addemail(request):
             user.save()
             return redirect('home')
         else:
-            return render(request, 'addemail.html', {'help': 'old password did not matched'})
+            return render(request, 'addemail.html', {'help': 'Incorrect Password'})
     else:
         return render(request, 'addemail.html')
 
@@ -99,7 +109,7 @@ def frgtpass(request):
             email.send()
             return redirect('home')
         else:
-            return render(request, 'frgtpass.html', {'help': 'username and email did not matched'})
+            return render(request, 'frgtpass.html', {'help': 'Username and Email did not match.'})
     else:
         return render(request, 'frgtpass.html')
 

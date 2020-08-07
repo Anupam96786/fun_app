@@ -19,13 +19,13 @@ def send_msg(request, username):
         if request.user.is_authenticated:
             return redirect('smsg_index')
         else:
-            return render(request, 'smsg_ad.html')
+            return render(request, 'smsg_ad.html',{'uname':receiver})
     else:
         try:
             receiver = User.objects.get(username=username)
             return render(request, 'smsg_send.html',{'uname':username})
         except:
-            return render(request, 'smsg_err.html')
+            return render(request, '404.html')
 
 
 def delmsg(request):

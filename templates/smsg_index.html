@@ -118,9 +118,23 @@ Secret Message
     ]
 </script>
 
+<div class="dialog" data-role="dialog" id="delall">
+    <div class="dialog-title">Delete all messages?</div>
+    <div class="dialog-content">This action will delete all messages. Are you sure?</div>
+    <div class="dialog-actions">
+        <a href="{%url 'delmsg'%}" class="button alert">Yes</a>
+        <button class="button" onclick="Metro.dialog.close(delall)">No</button>
+    </div>
+</div>
+
+
+
 <div class="spdiv" style="overflow-x:hidden;">
     <div class="wrapper">
-        <h1 class="text-center">MESSAGES RECEIVED <a href="{%url 'smsg_index'%}" class="button dark"><span class="mif-refresh icon"></a></h1>
+        <h1 class="text-center">MESSAGES RECEIVED
+        <a href="{%url 'smsg_index'%}" class="button dark"><span class="mif-refresh icon"></a>
+        <button onclick="Metro.dialog.open(delall)" class="button dark"><span class="mif-bin icon"></button>
+        </h1>
         <div style="margin-bottom: 50px;">
             <h5>Share this link to receive anonymous messages:</h5>
             <input

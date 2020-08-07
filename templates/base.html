@@ -27,11 +27,11 @@
   </head>
   <body class="fg-light">
       <script>
-    var winlocbtn = [
+    var winlocbtnsb = [
         {
             html: "<span class='mif-compass'></span>",
             cls: "search",
-            onclick: "window.location.replace(document.getElementById('winloc').value)"
+            onclick: "window.location.replace(document.getElementById('winlocsb').value)"
         }
     ]
 </script>
@@ -52,7 +52,7 @@
             <li><a href="{%url 'smsg_index'%}"><span class="mif-chat icon"></span>Secret Messages</a></li>
             <li class="divider"></li>
             <li><a disabled><span class="mif-envelop icon"></span>SEND MESSAGE</a></li>
-            <li><input type="text" id="winloc" data-role="input" data-clear-button="false" placeholder="Enter link here" data-custom-buttons="winlocbtn"></li>
+            <li><input type="text" id="winlocsb" data-role="input" class="bg-blue fg-light" data-clear-button="false" placeholder="Enter link here" data-custom-buttons="winlocbtnsb"></li>
             <li class="divider"></li>
             <div id="installContainer" class="hidden"><li><button id="butInstall" class="sidebar-menu button primary"><span class="mif-download2 icon"></span>INSTALL</button></li></div>
         </ul>

@@ -2,16 +2,76 @@
 
 
 {% block title %}
-Change Password
+Edit Email
 {% endblock title %}
 
 
 {% block body %}
-<form method="POST">
-    {% csrf_token %}
-    <input type="password" name='pass' placeholder="your password">
-    <input type="email" name='email' placeholder="email">
-    <button type="submit">Submit</button>
-</form>
-{{ help }}
+<style>
+.wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    width: 350px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    padding: 2rem;
+    background: #ffffff;
+}
+.form-input{
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    width: 100%;
+}
+.form-group{
+    margin-bottom: 1rem;
+}
+.form-button{
+    background: #69d2e7;
+    border: 1px solid #ddd;
+    color: #ffffff;
+    padding: 10px;
+    width: 100%;
+    text-transform: uppercase;
+}
+.form-button:hover{
+    background: #69c8e7;
+}
+.form-header{
+    text-align: center;
+    margin-bottom : 2rem;
+    color : #000000;
+}
+</style>
+
+    <div class="wrap pos-fixed pos-center">
+        <form class="form" method="POST">
+            {% csrf_token %}
+            <div class="form-header">
+                <h3>Email Setup</h3>
+                {% if user.email == '' %}
+                Add Email
+                {% else %}
+                <h6>Current: {{user.email}}</h6>
+                {% endif %}
+                <p>Please enter correct email because it will be used to reset your password if lost.</p>
+            </div>
+            <div class="form-group">
+                <input required type="password" name='pass' data-role="input" placeholder="Enter Password">
+                <p class="fg-red">{{help}}</p>
+            </div>
+            <div class="form-group">
+                <input required type="email" name='email' placeholder="New email">
+            </div>
+            <div class="form-group">
+                <button class="form-button" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
 {% endblock body %}
