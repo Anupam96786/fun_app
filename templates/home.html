@@ -46,7 +46,7 @@ HOME
                             <span>{{error}}</span>
                         </div>
                         <div class="form-group">
-                            <input required type="password" name="password" data-role="input" placeholder="Password" class="" placeholder="Password" value="" />
+                            <input required type="password" name="password" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Password" class="" placeholder="Password" value="" />
                         </div>
                         <div class="form-group">
                             <h6 class="fg-red">{{lerror}}</p>
@@ -61,19 +61,20 @@ HOME
                 </div>
                 <div class="col-md-6 login-form-2">
                     <h3>Sign Up</h3>
-                    <form method="POST" action="/signup/" class="form-group" autocomplete="off">
+                    <form method="POST" action="/signup/" class="form-group" autocomplete="off" data-role="validator" action="javascript:" data-interactive-check="true">
                         {%csrf_token%}
                         <div class="form-group">
                             <input required type="text" name="susername" autocomplete="off" data-role="input" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Username" />
                         </div>
                         <div class="form-group">
-                            <input type="email" data-role="input" name="email" value="" placeholder="Email" />
+                            <input type="email" data-role="input" name="email" value="" data-clear-button-icon="<span class='mif-cancel'></span>" placeholder="Email" />
                         </div>
                         <div class="form-group">
-                            <input required id='pw1' type="password" name="spassword" data-role="input" placeholder="Password" />
+                            <input required id='pw1' type="password" data-clear-button-icon="<span class='mif-cancel'></span>" name="spassword" data-role="input" placeholder="Password" />
                         </div>
                         <div class="form-group">
-                            <input required id='pw2' type="password" name="spassword2" data-role="input" placeholder="Enter Password Again"/>
+                            <input required id='pw2' type="password" data-clear-button-icon="<span class='mif-cancel'></span>" name="spassword2" data-role="input" data-validate="required compare=spassword" placeholder="Enter Password Again"/>
+                            <span class="invalid_feedback">Passwords Don't Match</span>
                         </div>
                         <div class="form-group">
                             <h6 class="fg-red">{{help}}</p>

@@ -18,7 +18,7 @@ def home(request):
 def usersignup(request):
     if request.method == 'POST':
         try:
-            username = request.POST['susername']
+            username = request.POST['susername'].replace(" ", "")
             password = request.POST['spassword']
             password2 = request.POST['spassword2']
             email = request.POST['email']
@@ -40,7 +40,7 @@ def usersignup(request):
 
 def userlogin(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('username').replace(" ", "")
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -101,7 +101,8 @@ def frgtpass(request):
     else:
         if request.method == 'POST':
             try:
-                user = User.objects.get(username=request.POST.get('username'), email=request.POST.get('email'))
+                uname=request.POST.get('username').replace(" ","")
+                user = User.objects.get(username=uname, email=request.POST.get('email'))
             except:
                 user = None
             if user is not None:
