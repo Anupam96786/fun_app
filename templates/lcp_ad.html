@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Secret Messages and More!!
+{% endblock title %}
+
+
+{% block body %}
+all data about your relation... sent to {{uname}}
+
+    <div class="wrap pos-fixed pos-center">
+        <div class="form">
+            <div class="form-header">
+                <h3>Create an Account</h3>
+                <p>Create an account to know about other relationships</p>
+            </div>
+            <div class="form-group">
+                <a href="/"><button class="form-button">Create Now</button></a>
+            </div>
+            <div class="form-group">
+                <h5 class="fg-dark" style="text-align: center;">Try out our other projects:</h4>
+            </div>
+            <div class="form-group">
+                <a href="https://hospitalfinder.pythonanywhere.com"><button class="form-button"><span class="mif-ambulance mif-3x"></span></button></a>
+            </div>
+            <div class="form-group">
+                <h6 class="fg-dark" style="text-align: center;">HOSPITAL FINDER</h6>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}

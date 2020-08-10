@@ -2,7 +2,7 @@
 
 
 {% block title %}
-Secret Message
+Love Calculator Prank
 {% endblock title %}
 
 
@@ -21,7 +21,7 @@ Secret Message
     <div class="dialog-title">Delete all messages?</div>
     <div class="dialog-content">This action will delete all messages. Are you sure?</div>
     <div class="dialog-actions">
-        <a href="{%url 'delmsg'%}" class="button alert">Yes</a>
+        <a href="{%url 'lcp_del'%}" class="button alert">Yes</a>
         <button class="button" onclick="Metro.dialog.close(delall)">No</button>
     </div>
 </div>
@@ -30,15 +30,15 @@ Secret Message
 
 <div class="spdiv" style="overflow-x:hidden;">
     <div class="wrapper">
-        <h1 class="text-center">MESSAGES RECEIVED
-        <a href="{%url 'smsg_index'%}" class="button dark"><span class="mif-refresh icon"></a>
+        <h1 class="text-center">SECRET RELATIONSHIPS
+        <a href="{%url 'lcp_index'%}" class="button dark"><span class="mif-refresh icon"></a>
         <button onclick="Metro.dialog.open(delall)" class="button dark"><span class="mif-bin icon"></button>
         </h1>
         <div style="margin-bottom: 50px;">
-            <h5>Share this link to receive anonymous messages:</h5>
+            <h5>Share this link to know about secret relation:</h5>
             <input
                 type="text"
-                value="https://{{ domain }}/secret_msg/{{request.user.username}}"
+                value="https://{{ domain }}/lovecalcp/{{request.user.id}}"
                 id="myInput"
                 data-role="input"
                 data-custom-buttons="customButtons"
@@ -46,11 +46,10 @@ Secret Message
                 readonly
             >
         </div>
-        {%for message in messages %}
+        {%for relation in relations %}
             <div class="speechbubble">
                 <p>
-                    {{message}}
-                    <span class="username">Anonymous</span>
+                    {{relation.love1}} loves {{relation.love2}}
                 </p>
             </div>
         {% endfor %}

@@ -31,4 +31,6 @@ urlpatterns = [
     path('secret_msg/', include('secret_msg.urls')),
     url(r'^respass/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.respass, name='respass'),
     re_path(r'^serviceworker.js', (TemplateView.as_view(template_name="serviceworker.js", content_type='application/javascript', )), name='serviceworker.js'),
+    path('lovecalcp/', include('lovecalc_prank.urls')),
+    
 ]
