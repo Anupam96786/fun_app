@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Love Test
+{% endblock title %}
+
+{% block body %}
+    <div class="wrap pos-fixed pos-center">
+        <form class="form" method="POST">
+            {% csrf_token %}
+            <div class="form-header">
+                <h3>Love Test</h3>
+                <p>Test the love % with your beloved</p>
+            </div>
+            <div class="form-group">
+                <textarea class='form-input' rows='1' data-min-rows='1' name="love1" placeholder='Your name'></textarea>
+            </div>
+            <div class="form-group">
+                <textarea class='form-input' rows='1' data-min-rows='1' name="love2" placeholder='Your beloved name'></textarea>
+            </div>
+            <div class="form-group">
+                <button class="form-button" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+{% endblock body %}

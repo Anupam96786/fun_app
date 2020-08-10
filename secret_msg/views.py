@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
+from django.contrib.sites.shortcuts import get_current_site
 from .models import Message
 from django.contrib.auth.models import User
 
 
 def index(request):
     if request.user.is_authenticated:
-        messages = {'messages': reversed(Message.objects.filter(receiver=request.user.id))}
-        return render(request, 'smsg_index.html', messages)
+        data = {'messages': reversed(Message.objects.filter(receiver=request.user.id)), 'domain': get_current_site(request).domain}
+        return render(request, 'smsg_index.html', data)
     else:
         return redirect('home')
 
